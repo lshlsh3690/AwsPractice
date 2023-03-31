@@ -1,6 +1,6 @@
 package AwsProject.Aws.web.dto;
 
-import AwsProject.Aws.web.domain.Posts;
+import AwsProject.Aws.domain.posts.Posts;
 import lombok.Getter;
 
 @Getter

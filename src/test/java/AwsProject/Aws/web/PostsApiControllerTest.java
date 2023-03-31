@@ -1,7 +1,7 @@
 package AwsProject.Aws.web;
 
-import AwsProject.Aws.web.domain.Posts;
-import AwsProject.Aws.web.domain.PostsRepository;
+import AwsProject.Aws.domain.posts.Posts;
+import AwsProject.Aws.domain.posts.PostsRepository;
 import AwsProject.Aws.web.dto.PostsSaveRequestDto;
 import AwsProject.Aws.web.dto.PostsUpdateRequestDto;
 import org.junit.jupiter.api.AfterEach;
@@ -18,7 +18,6 @@ import org.springframework.http.ResponseEntity;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 class PostsApiControllerTest {
