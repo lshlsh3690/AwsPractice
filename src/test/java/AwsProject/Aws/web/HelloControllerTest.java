@@ -1,12 +1,16 @@
 package AwsProject.Aws.web;
 
 import AwsProject.Aws.web.HelloController;
+import org.apache.catalina.security.SecurityConfig;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.FilterType;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultMatcher;
@@ -21,7 +25,11 @@ import static org.hamcrest.Matchers.is;
 junit4에서는 @Runwith 어노테이션을 쓰지만 junit5에서는 @ExtendWith 어노테이션을 쓴다.
  */
 @ExtendWith(SpringExtension.class)
-@WebMvcTest(controllers = HelloController.class)
+@WebMvcTest(controllers = HelloController.class,
+            excludeFilters = {
+            @ComponentScan.Filter(type = FilterType.ASSIGNABLE_TYPE,
+                classes = SecurityConfig.class)
+            })
 class HelloControllerTest {
 
     @Autowired
@@ -32,6 +40,7 @@ class HelloControllerTest {
 //        this.mvc = standaloneSetup(new HelloController()).build();
 //    }
     @Test
+    @WithMockUser(roles = "USER")
     public void hello() throws Exception{
         String hello = "hello";
 
@@ -41,6 +50,7 @@ class HelloControllerTest {
     }
 
     @Test
+    @WithMockUser(roles = "USER")
     void helloDto() throws Exception {
         String name = "hello";
         int amount = 1000;
